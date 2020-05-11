@@ -10,7 +10,7 @@ interface ICalorie {
 export class Calorie {
 
     public food?: string;
-    public servingSize: number;
+    public servingSize?: number;
     public quantity?: number;
     public calorieCount?: number;
     public editing?: boolean;
@@ -20,14 +20,14 @@ export class Calorie {
         Object.assign(this, calorie);
     }
 
-    setState(calorie: ICalorie){
-        if(calorie == null || Object.keys(calorie).length == 0) {
+    setState(calorie: ICalorie) {
+        if (calorie == null || Object.keys(calorie).length == 0) {
             return true;
         }
         let editing = false;
-        Object.keys(calorie).forEach((key) =>{
-            console.log('from setState...', calorie[key])
-            if(calorie[key] == null) {
+        Object.keys(calorie).forEach((key) => {
+            console.log('from setState...', calorie[key]);
+            if (calorie[key] == null) {
                 editing = true;
             }
         });
