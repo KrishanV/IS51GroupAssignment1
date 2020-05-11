@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Menu <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="calorieParams" name="search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="searchItem(calorieParams)">Search</button>
+      </form>
+    </div>
+  </nav>
+  
+  
+  <ul class="nav justify-content-end nav-action-container">
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary calorie-button" (click)="loadItems()">Load Food Items</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary calorie-button" (click)="saveItemsToLocalStorage(calories)">Save All</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary calorie-button" (click)="addItem()">Add Food Item</button>
+    </li>
+  </ul>
+
+  <div class="calorie-grid">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Serving Size</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Calories</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let calorie of calories; let i = index">
+        <th *ngIf="!calorie.editing" scope="row">{{calorie.food}}</th>
+        <td *ngIf="!calorie.editing">{{calorie.servingSize}}</td>
+        <td *ngIf="!calorie.editing">{{calorie.quantity}}</td>
+        <td *ngIf="!calorie.editing">{{calorie.calories}}</td>
+        <td *ngIf="!calorie.editing">
+          <button type="button" class="btn btn-danger calorie-button" (click)="deleteItem(i)">X</button>
+        </td>
+
+
+        <th *ngIf="calorie.editing" scope="row">
+          <input [(ngModel)]="calorie.id" type="text" class="form-control" placeholder="Food" aria-label="ID" aria-describedby="basic-addon1">
+        </th>
+        <td *ngIf="calorie.editing">
+          <input [(ngModel)]="calorie.firstName" type="text" class="form-control" placeholder="Serving Size" aria-label="First Name" aria-describedby="basic-addon1">
+        </td>
+        <td *ngIf="calorie.editing">
+          <input [(ngModel)]="calorie.lastName" type="text" class="form-control" placeholder="Quantity" aria-label="Last Name" aria-describedby="basic-addon1">
+        </td>
+        <td *ngIf="calorie.editing">
+          <input [(ngModel)]="calorie.email" type="text" class="form-control" placeholder="Calories" aria-label="Email" aria-describedby="basic-addon1">
+        </td>
+        <td *ngIf="calorie.editing">
+          <div class ="btn-group">
+          <button type="button" class="btn btn-success calorie-button" (click)="saveItem(calorie)">Save</button>
+          <button type="button" class="btn btn-danger calorie-button" (click)="deleteItem(i)">X</button>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

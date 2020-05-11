@@ -1,0 +1,23 @@
+[
+    {
+        "food": "Chicken",
+        "servingSize": 1,
+        "quantity": 1,
+        "calories": 600,
+        "editing": false
+    },
+    {
+        "food": "Pork",
+        "servingSize": 1,
+        "quantity": 1,
+        "calories": 900,
+        "editing": false
+    },
+    {
+        "food": "Lamb",
+        "servingSize": 1,
+        "quantity": 1,
+        "calories": 700,
+        "editing": false
+    }
+]
