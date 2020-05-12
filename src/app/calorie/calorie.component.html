@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <a class="navbar-brand" href="#">Be Fit App</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,15 +7,21 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Menu <span class="sr-only">(current)</span></a>
+          <a class="nav-link"> <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link">Hello, {{currentUser.username}}</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="calorieParams" name="search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="searchItem(calorieParams)">Search</button>
+        <div class="btn-group">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="searchItem(calorieParams)">Search</button>
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="logout()">Logout</button>
+        </div>
       </form>
     </div>
   </nav>
@@ -23,13 +29,16 @@
   
   <ul class="nav justify-content-end nav-action-container">
     <li class="nav-item">
-      <button type="button" class="btn btn-primary calorie-button" (click)="loadItems()">Load Food Items</button>
+      <button type="button" class="btn btn-info calorie-button" (click)="loadItems()">Load Food Items</button>
     </li>
     <li class="nav-item">
-      <button type="button" class="btn btn-primary calorie-button" (click)="saveItemsToLocalStorage(calories)">Save All</button>
+      <button type="button" class="btn btn-info calorie-button" (click)="saveItemsToLocalStorage(calories)">Save All</button>
     </li>
     <li class="nav-item">
-      <button type="button" class="btn btn-primary calorie-button" (click)="addItem()">Add Food Item</button>
+      <button type="button" class="btn btn-info calorie-button" (click)="addItem()">Add Food Item</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-info calorie-button">Calculate</button>
     </li>
   </ul>
 
@@ -56,16 +65,16 @@
 
 
         <th *ngIf="calorie.editing" scope="row">
-          <input [(ngModel)]="calorie.id" type="text" class="form-control" placeholder="Food" aria-label="ID" aria-describedby="basic-addon1">
+          <input [(ngModel)]="calorie.food" type="text" class="form-control" placeholder="Food" aria-label="Food" aria-describedby="basic-addon1">
         </th>
         <td *ngIf="calorie.editing">
-          <input [(ngModel)]="calorie.firstName" type="text" class="form-control" placeholder="Serving Size" aria-label="First Name" aria-describedby="basic-addon1">
+          <input [(ngModel)]="calorie.servingSize" type="text" class="form-control" placeholder="Serving Size" aria-label="Serving Size" aria-describedby="basic-addon1">
         </td>
         <td *ngIf="calorie.editing">
-          <input [(ngModel)]="calorie.lastName" type="text" class="form-control" placeholder="Quantity" aria-label="Last Name" aria-describedby="basic-addon1">
+          <input [(ngModel)]="calorie.quantity" type="text" class="form-control" placeholder="Quantity" aria-label="Quantity" aria-describedby="basic-addon1">
         </td>
         <td *ngIf="calorie.editing">
-          <input [(ngModel)]="calorie.email" type="text" class="form-control" placeholder="Calories" aria-label="Email" aria-describedby="basic-addon1">
+          <input [(ngModel)]="calorie.calories" type="text" class="form-control" placeholder="Calories" aria-label="Calories" aria-describedby="basic-addon1">
         </td>
         <td *ngIf="calorie.editing">
           <div class ="btn-group">
