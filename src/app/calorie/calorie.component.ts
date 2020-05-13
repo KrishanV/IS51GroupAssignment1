@@ -17,14 +17,16 @@ export class CalorieComponent implements OnInit {
 
   calories: Array<Calorie> = [];
   calorieParams: '';
-  localStorageService: LocalStorageService<Calorie>;
+  localStorageService: LocalStorageService<Calorie>
   currentUser: IUser;
+  confirmMessage: string;
 
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    
   ) {
     this.localStorageService = new LocalStorageService('calories');
 
@@ -47,6 +49,7 @@ export class CalorieComponent implements OnInit {
 
   async loadItems() {
     const savedCalories = this.getItemsFromLocalStorage('calories');
+    console.log(savedCalories);
     if (savedCalories && savedCalories.length > 0) {
       this.calories = savedCalories;
     } else {
@@ -58,6 +61,23 @@ export class CalorieComponent implements OnInit {
     const data: any = await this.http.get('assets/calorie.json').toPromise();
     console.log('from LoadItemsFromFile data: ', data);
     return data;
+  }
+
+  calculation() {
+    const total = this.calories.reduce((result, calorie) => {
+      result += calorie.calories * calorie.quantity;
+
+      return result;
+    }, 0);
+    return {
+      total,
+    };
+  }
+
+  calculate() {
+    const toCalculate = this.calculation();
+    this.confirmMessage = `Your total calories consumers are: ${toCalculate.total}`;
+    alert(this.confirmMessage);
   }
 
   addItem() {
@@ -95,7 +115,7 @@ export class CalorieComponent implements OnInit {
 
   getItemsFromLocalStorage(key: string) {
     const savedCalories = JSON.parse(localStorage.getItem(key));
-    return this.localStorageService.getItemsFromLocalStorage();
+    return this.localStorageService.getItemsFromLocalStorage(key);
     // return savedCalories;
   }
 

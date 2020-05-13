@@ -12,7 +12,7 @@ export class Calorie {
     public food?: string;
     public servingSize?: number;
     public quantity?: number;
-    public calorieCount?: number;
+    public calories?: number;
     public editing?: boolean;
 
     constructor(calorie: ICalorie) {
